@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parking Space Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        .upload-container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        
+        .upload-container label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .upload-container input[type="file"] {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .upload-container input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #337ab7;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .preview-image {
+            display: none;
+            max-width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Parking Space Classifier</h1>
+    <div class="upload-container">
+        <form method="POST" enctype="multipart/form-data" action="/">
+            <label for="file">Select an image or video file:</label>
+            <input type="file" name="file" id="file" accept="image/*, video/*">
+            <input type="submit" value="Upload">
+        </form>
+        <img class="preview-image" id="preview-image" src="#" alt="Preview Image">
+    </div>
+    
+    <script>
+        function previewFile() {
+            var fileInput = document.getElementById('file');
+            var previewImage = document.getElementById('preview-image');
+            
+            previewImage.style.display = 'none';
+            
+            var file = fileInput.files[0];
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                previewImage.src = e.target.result;
+                previewImage.style.display = 'block';
+            };
+            
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        var fileInput = document.getElementById('file');
+        fileInput.addEventListener('change', previewFile);
+    </script>
+</body>
+</html>
